@@ -4,6 +4,29 @@
       <input class="client__form__content__search__input" placeholder="Enter shared key" formControlName="sharedKey" type="text">
       <button class="client__form__content__search__button">Search</button>
     </div>
-    <button type="button" class="client__form__content__advanced" (click)="activeAdvancedSearch = true">Advanced Search</button>
+    <button *ngIf="!activeAdvancedSearch" type="button" class="client__form__content__advanced" (click)="activeAdvancedSearch = true">Advanced Search</button>
+  </div>
+  <div *ngIf="activeAdvancedSearch" class="client__form__advancedform">
+    <div class="client__form__advancedform__group">
+      <label class="client__form__advancedform__group__label" for="name">Name</label>
+      <input class="client__form__advancedform__group__input" type="text" name="name" formControlName="name">
+    </div>
+    <div class="client__form__advancedform__group">
+      <label class="client__form__advancedform__group__label" for="phone">Phone</label>
+      <input class="client__form__advancedform__group__input" type="text" name="phone" formControlName="phone">
+    </div>
+    <div class="client__form__advancedform__group">
+      <label class="client__form__advancedform__group__label" for="email">E-mail</label>
+      <input class="client__form__advancedform__group__input" type="email" name="email" formControlName="email">
+    </div>
+    <div class="client__form__advancedform__group">
+      <label class="client__form__advancedform__group__label" for="startDate">Start date</label>
+      <input class="client__form__advancedform__group__input" type="date" name="startDate" formControlName="startDate">
+    </div>
+    <div class="client__form__advancedform__group">
+      <label class="client__form__advancedform__group__label" for="endDate">End date</label>
+      <input class="client__form__advancedform__group__input" type="date" name="endDate" formControlName="endDate">
+    </div>
+    <button class="client__form__advancedform__save__button">Ok</button>
   </div>
 </form>

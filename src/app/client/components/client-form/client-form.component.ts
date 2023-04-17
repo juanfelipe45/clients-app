@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ClientSearch } from 'src/app/interfaces/clientRequest.interface';
 import { RegexValidators } from 'src/app/shared/constants/RegexValidators';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'client-client-form',
@@ -16,7 +17,7 @@ export class ClientFormComponent {
   @Output() public onErrorEvent: EventEmitter<string>  = new EventEmitter();;
   @Output() public emitFormEvent: EventEmitter<ClientSearch> = new EventEmitter();
 
-  constructor() {
+  constructor(private datePipe: DatePipe) {
     this.clienSearchGroup = new FormGroup({
       sharedKey: new FormControl('', [Validators.pattern(RegexValidators.alphaNumericV2)]),
       name: new FormControl('', [Validators.pattern(RegexValidators.alphaAccentuation)]),
@@ -29,37 +30,19 @@ export class ClientFormComponent {
 
   public onSubmit(): void {
     const requets = this.generateRequest();
-    if (!this.validRequest(requets)) {
-      this.onErrorEvent.emit('Form invalid');
-      return;
-    }
-
+    this.activeAdvancedSearch = false;
     this.emitFormEvent.emit(requets);
   }
 
   private generateRequest(): ClientSearch {
     return {
       sharedKey: this.clienSearchGroup.value.sharedKey,
-      name: this.clienSearchGroup.value.name,
-      email: this.clienSearchGroup.value.email,
-      phone: this.clienSearchGroup.value.phone,
-      fromCreationDate: this.clienSearchGroup.value.startDate,
-      toCreationDate: this.clienSearchGroup.value.endDate
+      name: this.activeAdvancedSearch ? this.clienSearchGroup.value.name : null,
+      email: this.activeAdvancedSearch ? this.clienSearchGroup.value.email : null,
+      phone: this.activeAdvancedSearch ? this.clienSearchGroup.value.phone : null,
+      fromCreationDate: this.activeAdvancedSearch ? this.datePipe.transform(this.clienSearchGroup.value.startDate, 'dd/MM/yyyy') : null,
+      toCreationDate: this.activeAdvancedSearch ? this.datePipe.transform(this.clienSearchGroup.value.endDate, 'dd/MM/yyyy') : null
     }
-  }
-
-  private validRequest(request: ClientSearch): boolean {
-    let isValid = false;
-    const keys: string[] = Object.keys(request);
-
-    for (let key of keys) {
-      if (request[key as keyof ClientSearch]) {
-        isValid = true;
-      }
-    }
-
-    return isValid;
-
   }
 
 }

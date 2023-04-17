@@ -3,8 +3,8 @@ export interface ClientSearch {
   name: string;
   email: string;
   phone: string;
-  fromCreationDate: string;
-  toCreationDate: string;
+  fromCreationDate: string | null;
+  toCreationDate: string | null;
 }
 
 export interface ClientRequest {
