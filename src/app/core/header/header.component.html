@@ -1,6 +1,11 @@
 <mat-toolbar class="header__content">
-  <button mat-icon-button (click)="toggleButton()" class="header__content__toggle">
-    <mat-icon>menu</mat-icon>
+  <button *ngIf="showToggle" mat-icon-button (click)="toggleButton()" class="header__content__toggle">
+    <mat-icon *ngIf="!isToggle">
+      menu
+    </mat-icon>
+    <mat-icon *ngIf="isToggle">
+        close
+    </mat-icon>
   </button>
   <div class="header__content__logo"></div>
 </mat-toolbar>

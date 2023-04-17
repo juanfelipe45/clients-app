@@ -12,7 +12,7 @@ import { PaginatorComponent } from './components/paginator/paginator.component';
 import { MatIconModule } from '@angular/material/icon';
 import { KeypadComponent } from './components/keypad/keypad.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
-
+import {ObserversModule} from '@angular/cdk/observers';
 
 
 @NgModule({
@@ -41,7 +41,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatTableModule,
     MatButtonModule,
     KeypadComponent,
-    MatToolbarModule
+    MatToolbarModule,
+    ObserversModule
   ]
 })
 export class SharedModule { }

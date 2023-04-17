@@ -1,9 +1,9 @@
 <header class="header">
-  <client-header (isToggleButton)="isToggleButton = $event"></client-header>
+  <client-header (isToggleButton)="$event ? drawer.open() : drawer.close()" [isToggle]="drawer.opened"></client-header>
 </header>
 <section class="body">
-  <mat-drawer-container class="sidebar__container" [hasBackdrop]="true" [autosize]="true">
-    <mat-drawer #drawer mode="over" [opened]="isToggleButton">
+  <mat-drawer-container class="sidebar__container" [hasBackdrop]="hasBackdrop" [autosize]="true">
+    <mat-drawer #drawer [mode]="mode">
       <client-side-bar></client-side-bar>
     </mat-drawer>
     <mat-drawer-content>
