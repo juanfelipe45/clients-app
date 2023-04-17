@@ -1,0 +1,9 @@
+<button mat-icon-button matDialogClose>
+  <mat-icon>close</mat-icon>
+</button>
+<form class="client__form" [formGroup]="clientSave" (ngSubmit)="onSubmit()">
+  <div class="client__form__group">
+    <label for="sharedKey">sharedKey</label>
+    <input type="text" name="sharedKey" formControlName="sharedKey">
+  </div>
+</form>

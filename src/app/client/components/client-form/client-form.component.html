@@ -1,0 +1,9 @@
+<form class="client__form" [formGroup]="clienSearchGroup" (ngSubmit)="onSubmit()">
+  <div class="client__form__content">
+    <div class="client__form__content__search">
+      <input class="client__form__content__search__input" placeholder="Enter shared key" formControlName="sharedKey" type="text">
+      <button class="client__form__content__search__button">Search</button>
+    </div>
+    <button type="button" class="client__form__content__advanced" (click)="activeAdvancedSearch = true">Advanced Search</button>
+  </div>
+</form>

@@ -22,7 +22,10 @@
     "@angular/router": "^15.0.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.12.0"
+    "zone.js": "~0.12.0",
+    "pdfmake": "^0.2.4",
+    "xlsx": "^0.18.5",
+    "ngx-perfect-scrollbar": "^10.1.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^15.0.0",

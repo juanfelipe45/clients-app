@@ -1,0 +1,15 @@
+<header class="header">
+  <client-header (isToggleButton)="isToggleButton = $event"></client-header>
+</header>
+<section class="body">
+  <mat-drawer-container class="sidebar__container" [hasBackdrop]="true" [autosize]="true">
+    <mat-drawer #drawer mode="over" [opened]="isToggleButton">
+      <client-side-bar></client-side-bar>
+    </mat-drawer>
+    <mat-drawer-content>
+      <router-outlet></router-outlet>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</section>
+
+
