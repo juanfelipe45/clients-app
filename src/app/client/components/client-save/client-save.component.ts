@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { RegexValidators } from 'src/app/shared/constants/RegexValidators';
 import { ClientResponse } from 'src/app/interfaces/clientResponse.interface';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'client-client-save',
@@ -16,23 +17,27 @@ export class ClientSaveComponent implements OnInit {
   public clientSave: FormGroup;
 
   public title: string = '';
+  public currentDate: Date = new Date();
+  public formattedDate: string | null = '';
 
   @Output() public onErrorEvent: EventEmitter<string>  = new EventEmitter();;
   @Output() public emitFormEvent: EventEmitter<ClientRequest> = new EventEmitter();
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private reference: MatDialogRef<ClientSaveComponent>
+    private reference: MatDialogRef<ClientSaveComponent>,
+    private datePipe: DatePipe
   ) {
     this.clientSave = new FormGroup({
       sharedKey: new FormControl('', [Validators.pattern(RegexValidators.alphaNumericV2)]),
       name: new FormControl('', [Validators.pattern(RegexValidators.alphaAccentuation)]),
       email: new FormControl('', [Validators.pattern(RegexValidators.email)]),
       phone: new FormControl('', [Validators.pattern(RegexValidators.numeric)]),
-      creationDate: new FormControl(),
+      creationDate: new FormControl(''),
     });
 
-    this.title = data ? 'EDIT' : 'ADD';
+    this.title = data ? 'Edit Client' : 'Create New Client ';
+    this.formattedDate = this.datePipe.transform(this.currentDate, 'dd/MM/yyyy');
   }
 
   ngOnInit() {
@@ -43,10 +48,11 @@ export class ClientSaveComponent implements OnInit {
     const requets = this.generateRequest();
     if (!this.validRequest(requets)) {
       this.onErrorEvent.emit('Form invalid');
+      this.reference.close();
       return;
     }
 
-    this.emitFormEvent.emit(requets);
+    this.reference.close({record: requets});
   }
 
   private generateRequest(): ClientRequest {
@@ -78,7 +84,8 @@ export class ClientSaveComponent implements OnInit {
       sharedKey: new FormControl(this.data?.sharedKey, [Validators.required, Validators.pattern(RegexValidators.alphaNumericV2)]),
       name: new FormControl(this.data?.name, [Validators.required, Validators.pattern(RegexValidators.alphaAccentuation)]),
       email: new FormControl(this.data?.email, [Validators.required, Validators.pattern(RegexValidators.email)]),
-      phone: new FormControl(this.data?.phone, [Validators.pattern(RegexValidators.numeric)])
+      phone: new FormControl(this.data?.phone, [Validators.pattern(RegexValidators.numeric)]),
+      creationDate: new FormControl(this.data?.creationDate? this.data?.creationDate : this.formattedDate)
     });
   }
 }

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
@@ -18,7 +18,7 @@ import { ClientSaveComponent } from './components/client-save/client-save.compon
   declarations: [
     ClientComponent,
     ClientFormComponent,
-    ClientSaveComponent
+    ClientSaveComponent,
   ],
   imports: [
     CommonModule,
@@ -27,11 +27,12 @@ import { ClientSaveComponent } from './components/client-save/client-save.compon
     ReactiveFormsModule,
     MatFormFieldModule,
     SharedModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     HttpService,
-    UtilsService
+    UtilsService,
+    DatePipe
   ]
 })
 export class ClientModule { }

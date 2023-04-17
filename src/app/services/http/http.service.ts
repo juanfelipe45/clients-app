@@ -16,7 +16,7 @@ export class HttpService {
   public page<T>(endPoint: string, pageIndex: number, pageSize: number, params?: any): Observable<GeneralResponse<PageResponse<T>>> {
 
     let httpParams: HttpParams = new HttpParams()
-                                      .append('pageIndez', pageIndex)
+                                      .append('pageIndex', pageIndex)
                                       .append('pageSize', pageSize);
     const keys: string[] = params ? Object.keys(params): [];
 
@@ -28,7 +28,7 @@ export class HttpService {
       }
     }
 
-    return this._http.get<GeneralResponse<PageResponse<T>>>(`${this.baseUrl}${endPoint}/page`, {params});
+    return this._http.get<GeneralResponse<PageResponse<T>>>(`${this.baseUrl}${endPoint}/page`, {params: httpParams});
   }
 
   public list<T>(endPoint: string): Observable<GeneralResponse<T[]>> {

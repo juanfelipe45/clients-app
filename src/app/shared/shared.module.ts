@@ -11,6 +11,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { MatIconModule } from '@angular/material/icon';
 import { KeypadComponent } from './components/keypad/keypad.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 
 
@@ -39,7 +40,8 @@ import { KeypadComponent } from './components/keypad/keypad.component';
     MatIconModule,
     MatTableModule,
     MatButtonModule,
-    KeypadComponent
+    KeypadComponent,
+    MatToolbarModule
   ]
 })
 export class SharedModule { }

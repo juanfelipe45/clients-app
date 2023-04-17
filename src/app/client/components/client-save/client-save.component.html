@@ -1,9 +1,24 @@
-<button mat-icon-button matDialogClose>
-  <mat-icon>close</mat-icon>
-</button>
-<form class="client__form" [formGroup]="clientSave" (ngSubmit)="onSubmit()">
-  <div class="client__form__group">
-    <label for="sharedKey">sharedKey</label>
-    <input type="text" name="sharedKey" formControlName="sharedKey">
+
+<mat-toolbar class="mat-toolbar-clients">
+  <label class="mat-toolbar-clients__label">{{ title }}</label>
+  <mat-icon matDialogClose>close</mat-icon>
+</mat-toolbar>
+<form class="clientsave__form" [formGroup]="clientSave" (ngSubmit)="onSubmit()">
+  <div class="clientsave__form__group">
+    <label class="clientsave__form__group__label" for="sharedKey">Shared Key</label>
+    <input class="clientsave__form__group__input" type="text" name="sharedKey" formControlName="sharedKey">
   </div>
+  <div class="clientsave__form__group">
+    <label class="clientsave__form__group__label" for="name">Name</label>
+    <input class="clientsave__form__group__input" type="text" name="name" formControlName="name">
+  </div>
+  <div class="clientsave__form__group">
+    <label class="clientsave__form__group__label" for="phone">Phone</label>
+    <input class="clientsave__form__group__input" type="text" name="phone" formControlName="phone">
+  </div>
+  <div class="clientsave__form__group">
+    <label class="clientsave__form__group__label" for="email">E-mail</label>
+    <input class="clientsave__form__group__input" type="email" name="email" formControlName="email">
+  </div>
+  <button class="clientsave__form__content__search__button">Ok</button>
 </form>
